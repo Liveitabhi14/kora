@@ -3,6 +3,7 @@ package com.projects.kora.service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class KoraService {
 
@@ -30,7 +31,7 @@ public class KoraService {
 
     }
 
-    public HashMap<Question,Answer[]> listViewOfQuesAnsTop5 () {
+    public LinkedHashMap<Question,Answer[]> listViewOfQuesAnsTop5 () {
 
     }
 
@@ -40,6 +41,10 @@ public class KoraService {
 
     public String downVote ( int ansId ) {
         return "Down voted";
+    }
+
+    public LinkedHashMap<Question,List<Answer> > seeAllAnsOfQues (int quesId) {
+
     }
 
 }

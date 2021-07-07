@@ -4,6 +4,7 @@ import com.projects.kora.service.KoraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @RestController
@@ -44,7 +45,7 @@ public class KoraController {
     }
 
     @GetMapping ("/kora/viewQuesAns")
-    private HashMap<Question,Answer[]> listViewOfQuesAnsTop5 () {
+    private LinkedHashMap<Question,Answer[]> listViewOfQuesAnsTop5 () {
         return koraService.listViewOfQuesAnsTop5();
     }
 
@@ -56,6 +57,11 @@ public class KoraController {
     @GetMapping ("/kora/downVote/{ansId}")
     private String downVote ( @PathVariable("ansId") int ansId ) {
         return koraService.downVote(ansId);
+    }
+
+    @GetMapping ("/kora/quesAllAns/{quesId}")
+    private LinkedHashMap<Question,List<Answer> > seeAllAnsOfQues (@PathVariable("quesId") int quesId ){
+        return koraService.seeAllAnsOfQues(quesId);
     }
 
 }
