@@ -2,8 +2,8 @@ package com.projects.kora.auth.controller;
 
 import com.projects.kora.auth.config.JwtTokenUtil;
 import com.projects.kora.auth.model.JwtRequest;
-
 import com.projects.kora.auth.model.JwtResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
