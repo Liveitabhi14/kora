@@ -12,7 +12,7 @@ public class QAModel {
     @Column(name="updated",nullable=false)
     private Date updatedAt;
 
-    @Column(name="userID", nullable=false)
+    @Column(name="user_id", nullable=false)
     private int userID;
 
     public QAModel(Date createdAt, Date updatedAt, int userID) {

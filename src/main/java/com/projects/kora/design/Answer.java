@@ -15,7 +15,7 @@ public class Answer extends QAModel{
     @Column (name = "body")
     private String text;
 
-    @Column(name="QID")
+    @Column(name="q_id")
     private int qid;
 
 
