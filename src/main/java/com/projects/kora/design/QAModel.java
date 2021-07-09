@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.Date;
 
-@Entity
+
 public class QAModel {
     @Column(name="created",nullable = false,updatable = false)
     private Date createdAt;
