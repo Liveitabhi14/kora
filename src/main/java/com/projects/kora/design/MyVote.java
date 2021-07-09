@@ -1,32 +1,32 @@
 package com.projects.kora.design;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class MyVote {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int voteId;
 
-    @Column(name = "ans_id")
-    private String ansId;
+    @Column(name = "ans_id",nullable = false)
+    private int ansId;
 
-    @Column(name="ques_id")
+    @Column(name="ques_id",nullable = false)
     private int quesId;
 
-    @Column(name="upvote")
+    @Column(name="upvote",nullable = false)
     private int upvote;
 
-    @Column(name="downvote")
+    @Column(name="downvote",nullable = false)
     private int downvote;
 
     public MyVote() {
+        this.upvote = 0;
+        this.downvote = 0;
     }
 
-    public MyVote(int voteId, String ansId, int quesId, int upvote, int downvote) {
+    public MyVote(int voteId, int ansId, int quesId, int upvote, int downvote) {
         this.voteId = voteId;
         this.ansId = ansId;
         this.quesId = quesId;
@@ -42,11 +42,11 @@ public class MyVote {
         this.voteId = voteId;
     }
 
-    public String getAnsId() {
+    public int getAnsId() {
         return ansId;
     }
 
-    public void setAnsId(String ansId) {
+    public void setAnsId(int ansId) {
         this.ansId = ansId;
     }
 

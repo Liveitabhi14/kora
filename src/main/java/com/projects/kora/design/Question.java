@@ -1,18 +1,16 @@
 package com.projects.kora.design;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 //import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
 public class Question extends QAModel{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int quesId;
 
-    @Column(name="ques_body")
+    @Column(name="ques_body",nullable = false)
     private String quesBody;
 
 

@@ -1,9 +1,7 @@
 package com.projects.kora.design;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.annotation.Generated;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -11,12 +9,13 @@ import java.util.Date;
 public class Answer extends QAModel{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ansId;
 
-    @Column (name = "ans_body")
+    @Column (name = "ans_body",nullable = false)
     private String ansBody;
 
-    @Column(name="ques_id")
+    @Column(name="ques_id",nullable = false)
     private int quesId;
 
 
