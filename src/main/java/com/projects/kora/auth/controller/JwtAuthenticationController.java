@@ -3,7 +3,9 @@ package com.projects.kora.auth.controller;
 import com.projects.kora.auth.config.JwtTokenUtil;
 import com.projects.kora.auth.model.JwtRequest;
 import com.projects.kora.auth.model.JwtResponse;
+import com.projects.kora.auth.model.UserDTO;
 
+import com.projects.kora.auth.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +29,7 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserDetailsService jwtInMemoryUserDetailsService;
+    private JwtUserDetailsService jwtInMemoryUserDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest)
@@ -40,6 +42,11 @@ public class JwtAuthenticationController {
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
+        return ResponseEntity.ok(jwtInMemoryUserDetailsService.saveUser(user));
     }
 
     private void authenticate(String username, String password) throws Exception {
