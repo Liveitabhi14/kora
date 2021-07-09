@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 // don't authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/authenticate")
+                .antMatchers("/authenticate", "/register")
                 .permitAll()
                 // all other requests need to be authenticated
                 .anyRequest()
