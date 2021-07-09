@@ -6,71 +6,71 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="my_vote_table")
+@Table
 public class MyVote {
     @Id
-    private int id;
+    private int voteId;
 
     @Column(name = "ans_id")
-    private String text;
+    private String ansId;
 
-    @Column(name="q_id")
-    private int qId;
+    @Column(name="ques_id")
+    private int quesId;
 
     @Column(name="upvote")
-    private int upVote;
+    private int upvote;
 
     @Column(name="downvote")
-    private int downVote;
+    private int downvote;
 
     public MyVote() {
     }
 
-    public MyVote(int id, String text, int qId, int upVote, int downVote) {
-        this.id = id;
-        this.text = text;
-        this.qId = qId;
-        this.upVote = upVote;
-        this.downVote = downVote;
+    public MyVote(int voteId, String ansId, int quesId, int upvote, int downvote) {
+        this.voteId = voteId;
+        this.ansId = ansId;
+        this.quesId = quesId;
+        this.upvote = upvote;
+        this.downvote = downvote;
     }
 
-    public int getId() {
-        return id;
+    public int getVoteId() {
+        return voteId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setVoteId(int voteId) {
+        this.voteId = voteId;
     }
 
-    public String getText() {
-        return text;
+    public String getAnsId() {
+        return ansId;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setAnsId(String ansId) {
+        this.ansId = ansId;
     }
 
-    public int getqId() {
-        return qId;
+    public int getQuesId() {
+        return quesId;
     }
 
-    public void setqId(int qId) {
-        this.qId = qId;
+    public void setQuesId(int quesId) {
+        this.quesId = quesId;
     }
 
-    public int getUpVote() {
-        return upVote;
+    public int getUpvote() {
+        return upvote;
     }
 
-    public void setUpVote(int upVote) {
-        this.upVote = upVote;
+    public void setUpvote(int upvote) {
+        this.upvote = upvote;
     }
 
-    public int getDownVote() {
-        return downVote;
+    public int getDownvote() {
+        return downvote;
     }
 
-    public void setDownVote(int downVote) {
-        this.downVote = downVote;
+    public void setDownvote(int downvote) {
+        this.downvote = downvote;
     }
 }

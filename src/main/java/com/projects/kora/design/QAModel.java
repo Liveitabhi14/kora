@@ -2,23 +2,24 @@ package com.projects.kora.design;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
-
+@MappedSuperclass
 public class QAModel {
-    @Column(name="created",nullable = false,updatable = false)
+    @Column(name="created_at",nullable = false,updatable = false)
     private Date createdAt;
 
-    @Column(name="updated",nullable=false)
+    @Column(name="updated_at",nullable=false)
     private Date updatedAt;
 
     @Column(name="user_id", nullable=false)
-    private int userID;
+    private int userId;
 
-    public QAModel(Date createdAt, Date updatedAt, int userID) {
+    public QAModel(Date createdAt, Date updatedAt, int userId) {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.userID = userID;
+        this.userId = userId;
     }
 
     public QAModel() {
@@ -26,14 +27,6 @@ public class QAModel {
 
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public void setCreatedAt(Date createdAt) {
@@ -46,5 +39,13 @@ public class QAModel {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

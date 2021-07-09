@@ -7,36 +7,31 @@ import javax.persistence.Table;
 //import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="question_table")
+@Table
 public class Question extends QAModel{
     @Id
-    private int qid;
+    private int quesId;
 
-    //@NotNull
-    @Column(name="body")
-    private String text;
+    @Column(name="ques_body")
+    private String quesBody;
 
-    public Question(int qid, String text) {
-        this.qid = qid;
-        this.text = text;
-    }
 
     public Question() {
     }
 
-    public int getQid() {
-        return qid;
+    public int getQuesId() {
+        return quesId;
     }
 
-    public void setQid(int qid) {
-        this.qid = qid;
+    public void setQuesId(int quesId) {
+        this.quesId = quesId;
     }
 
-    public String getText() {
-        return text;
+    public String getQuesBody() {
+        return quesBody;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setQuesBody(String quesBody) {
+        this.quesBody = quesBody;
     }
 }

@@ -4,53 +4,53 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
-@Table(name="answer_table")
+@Table
 public class Answer extends QAModel{
 
     @Id
-    private int id;
+    private int ansId;
 
-    @Column (name = "body")
-    private String text;
+    @Column (name = "ans_body")
+    private String ansBody;
 
-    @Column(name="q_id")
-    private int qid;
+    @Column(name="ques_id")
+    private int quesId;
 
 
     public Answer() {
     }
 
-    public Answer(int id, String text, int qid) {
-        this.id = id;
-        this.text = text;
-        this.qid = qid;
+    public Answer(Date createdAt, Date updatedAt, int userID, int ansId, String ansBody, int quesId) {
+        super(createdAt, updatedAt, userID);
+        this.ansId = ansId;
+        this.ansBody = ansBody;
+        this.quesId = quesId;
     }
 
-    public int getId() {
-        return id;
+    public int getAnsId() {
+        return ansId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAnsId(int ansId) {
+        this.ansId = ansId;
     }
 
-    public String getText() {
-        return text;
+    public String getAnsBody() {
+        return ansBody;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setAnsBody(String ansBody) {
+        this.ansBody = ansBody;
     }
 
-    public int getQid() {
-        return qid;
+    public int getQuesId() {
+        return quesId;
     }
 
-    public void setQid(int qid) {
-        this.qid = qid;
+    public void setQuesId(int queId) {
+        this.quesId = queId;
     }
-
-
 }
