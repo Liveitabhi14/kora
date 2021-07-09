@@ -25,12 +25,15 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if("kora".equals(username)) {
-            return new User("kora", "$2a$10$VH13WslwBNQe5zoOjPUzhuu0q3AGoIrOxG3JuEf3tGP8vKX9Pd3.S", new ArrayList<>());
-        }
-        else {
+
+        UserDAO user = userRepository.findByUsername(username);
+//        if("kora".equals(username)) {
+//            return new User("kora", "$2a$10$VH13WslwBNQe5zoOjPUzhuu0q3AGoIrOxG3JuEf3tGP8vKX9Pd3.S", new ArrayList<>());
+//        }
+        if(user == null) {
             throw new UsernameNotFoundException("User not found with username:" + username);
         }
+        return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
     }
 
     public UserDTO saveUser(UserDTO user) {
