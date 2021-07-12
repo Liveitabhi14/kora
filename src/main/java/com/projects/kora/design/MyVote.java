@@ -9,7 +9,7 @@ public class MyVote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int voteId;
 
-    @Column(name = "ans_id",nullable = false,default = 0)
+    @Column(name = "ans_id",nullable = false)
     private int ansId;
 
     @Column(name="user_id",nullable = false)
@@ -54,8 +54,8 @@ public class MyVote {
         return userId;
     }
 
-    public void setQuesId(int quesId) {
-        this.userId = quesId;
+    public void setQuesId(int userId) {
+        this.userId = userId;
     }
 
     public int getUpvote() {
