@@ -123,9 +123,9 @@ public class KoraService {
         return myVote2;
     }
 
-    public Pair<Integer ,List<Answer> > seeAllAnsOfQues (int quesId) {
+    public List<Answer>  seeAllAnsOfQues (int quesId) {
         List<Answer> temp = answerRepository.findByquesId(quesId);
-        return new Pair(quesId,temp);
+        return temp;
     }
 
 }

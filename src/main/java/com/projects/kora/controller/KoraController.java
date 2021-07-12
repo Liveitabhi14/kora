@@ -62,7 +62,7 @@ public class KoraController {
     }
 
     @GetMapping ("/kora/quesAllAns/{quesId}")
-    private Pair<Integer, List<Answer>> seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
+    private List<Answer> seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
         return koraService.seeAllAnsOfQues(quesId);
     }
 
