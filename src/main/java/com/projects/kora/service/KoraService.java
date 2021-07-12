@@ -1,8 +1,10 @@
 package com.projects.kora.service;
 
-import com.projects.kora.model.Answer;
-import com.projects.kora.model.Question;
+import com.projects.kora.design.Answer;
+import com.projects.kora.design.MyVote;
+import com.projects.kora.design.Question;
 import com.projects.kora.repository.AnswerRepository;
+import com.projects.kora.repository.MyVoteRepository;
 import com.projects.kora.repository.QuestionRepository;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class KoraService {
     QuestionRepository questionRepository;
     @Autowired
     AnswerRepository answerRepository;
+    @Autowired
+    MyVoteRepository myVoteRepository;
 
     public String welcomeMessage() {
         return "Welcome to Kora";
@@ -55,15 +59,65 @@ public class KoraService {
 //    public LinkedHashMap<Question,List<Answer> listViewOfQuesAnsTop5 () {
 //
 //    }
-//
-//    public String upVote ( int ansId ) {
-//        return "up voted";
-//    }
-//
-//    public String downVote ( int ansId ) {
-//        return "Down voted";
-//    }
-//
+
+    public MyVote upVote ( MyVote myVote ) {
+        int ansId = myVote.getAnsId();
+        int userId = myVote.getUserId();
+        MyVote myVote2 = myVoteRepository.findByAnsIdAndUserId(ansId,userId);
+        List<Answer> answerList = answerRepository.findByansId(ansId);
+
+        if(answerList.size() == 0 ) {
+            System.out.println("answer is null");
+            return myVote;
+        }
+        Answer answer = answerList.get(0);
+        if ( myVote2 == null ) {
+            answer.setUpVoteSum( answer.getUpVoteSum() + 1 );
+        }
+        else {
+            if (myVote2.getUpVote() == 0) {
+                answer.setUpVoteSum(answer.getUpVoteSum() + 1);
+            }
+            if (myVote2.getDownVote() == 1) {
+                answer.setDownVoteSum(answer.getDownVoteSum() - 1);
+            }
+        }
+
+        myVote.setUpVote(1);
+        myVote.setDownVote(0);
+        MyVote myVote1 = (MyVote) myVoteRepository.save(myVote);
+        return myVote1;
+    }
+
+    public MyVote downVote ( MyVote myVote ) {
+        int ansId = myVote.getAnsId();
+        int userId = myVote.getUserId();
+        MyVote myVote2 = myVoteRepository.findByAnsIdAndUserId(ansId,userId);
+        List<Answer> answerList = answerRepository.findByansId(ansId);
+
+        if(answerList.size() == 0 ) {
+            System.out.println("answer is null");
+            return myVote;
+        }
+        Answer answer = answerList.get(0);
+        if( myVote2 == null ) {
+            answer.setDownVoteSum( answer.getDownVoteSum() + 1 );
+        }
+        else {
+            if (myVote2.getDownVote() == 0) {
+                answer.setDownVoteSum(answer.getDownVoteSum() + 1);
+            }
+            if (myVote2.getUpVote() == 1) {
+                answer.setUpVoteSum(answer.getUpVoteSum() - 1);
+            }
+        }
+
+        myVote.setDownVote(1);
+        myVote.setUpVote(0);
+        MyVote myVote1 = (MyVote) myVoteRepository.save(myVote);
+        return myVote1;
+    }
+
     public Pair<Integer ,List<Answer> > seeAllAnsOfQues (int quesId) {
         List<Answer> temp = answerRepository.findByquesId(quesId);
         return new Pair(quesId,temp);

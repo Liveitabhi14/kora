@@ -9,17 +9,17 @@ public class MyVote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int voteId;
 
-    @Column(name = "ans_id",nullable = false)
+    @Column(name = "ans_id",nullable = true)
     private int ansId;
 
-    @Column(name="user_id",nullable = false)
+    @Column(name="user_id",nullable = true)
     private int userId;
 
-    @Column(name="upvote",nullable = false)
-    private int upVote = 0;
+    @Column(name="upvote",nullable = true)
+    private int upVote;
 
-    @Column(name="downvote",nullable = false)
-    private int downVote = 0;
+    @Column(name="downvote",nullable = true)
+    private int downVote;
 
     public MyVote() {
         this.upVote = 0;
@@ -50,11 +50,11 @@ public class MyVote {
         this.ansId = ansId;
     }
 
-    public int getQuesId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setQuesId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -72,5 +72,16 @@ public class MyVote {
 
     public void setDownVote(int downVote) {
         this.downVote = downVote;
+    }
+
+    @Override
+    public String toString() {
+        return "MyVote{" +
+                "voteId=" + voteId +
+                ", ansId=" + ansId +
+                ", userId=" + userId +
+                ", upVote=" + upVote +
+                ", downVote=" + downVote +
+                '}';
     }
 }

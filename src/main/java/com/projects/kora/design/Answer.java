@@ -18,15 +18,21 @@ public class Answer extends QAModel{
     @Column(name="ques_id",nullable = false)
     private int quesId;
 
+    @Column(columnDefinition = "integer default 0")
+    private int upVoteSum;
+
+    @Column(columnDefinition = "integer default 0")
+    private int downVoteSum;
 
     public Answer() {
-    }
 
-    public Answer(Date createdAt, Date updatedAt, int userID, int ansId, String ansBody, int quesId) {
-        super(createdAt, updatedAt, userID);
-        this.ansId = ansId;
+    }
+    public Answer(Date createdAt, Date updatedAt, int userId, String ansBody, int quesId, int upVoteSum, int downVoteSum) {
+        super(createdAt, updatedAt, userId);
         this.ansBody = ansBody;
         this.quesId = quesId;
+        this.upVoteSum = upVoteSum;
+        this.downVoteSum = downVoteSum;
     }
 
     public int getAnsId() {
@@ -49,7 +55,23 @@ public class Answer extends QAModel{
         return quesId;
     }
 
-    public void setQuesId(int queId) {
-        this.quesId = queId;
+    public void setQuesId(int quesId) {
+        this.quesId = quesId;
+    }
+
+    public int getUpVoteSum() {
+        return upVoteSum;
+    }
+
+    public void setUpVoteSum(int upVoteSum) {
+        this.upVoteSum = upVoteSum;
+    }
+
+    public int getDownVoteSum() {
+        return downVoteSum;
+    }
+
+    public void setDownVoteSum(int downVoteSum) {
+        this.downVoteSum = downVoteSum;
     }
 }

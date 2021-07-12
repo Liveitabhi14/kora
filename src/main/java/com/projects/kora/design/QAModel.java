@@ -1,19 +1,24 @@
 package com.projects.kora.design;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.util.Date;
 
 @MappedSuperclass
 public class QAModel {
-    @Column(name="created_at",nullable = false,updatable = false)
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    @Column(name="created_at",nullable = true,updatable = false)
     private Date createdAt;
 
-    @Column(name="updated_at",nullable=false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    @Column(name="updated_at",nullable=true)
     private Date updatedAt;
 
-    @Column(name="user_id", nullable=false)
+    @Column(name="user_id", nullable=true)
     private int userId;
 
     public QAModel(Date createdAt, Date updatedAt, int userId) {

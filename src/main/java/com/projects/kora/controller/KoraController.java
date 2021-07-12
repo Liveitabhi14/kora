@@ -1,7 +1,8 @@
 package com.projects.kora.controller;
 
-import com.projects.kora.model.Answer;
-import com.projects.kora.model.Question;
+import com.projects.kora.design.Answer;
+import com.projects.kora.design.MyVote;
+import com.projects.kora.design.Question;
 import com.projects.kora.service.KoraService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,16 +53,16 @@ public class KoraController {
 //        return koraService.listViewOfQuesAnsTop5();
 //    }
 //
-//    @GetMapping ("/kora/upVote/{ansId}")
-//    private String upVote ( @PathVariable("ansId") int ansId ) {
-//        return koraService.upVote(ansId);
-//    }
-//
-//    @GetMapping ("/kora/downVote/{ansId}")
-//    private String downVote ( @PathVariable("ansId") int ansId ) {
-//        return koraService.downVote(ansId);
-//    }
-//
+    @PostMapping ("/kora/upVote")
+    private MyVote upVote (@RequestBody MyVote myVote) {
+        return koraService.upVote(myVote);
+    }
+
+    @PostMapping ("/kora/downVote")
+    private MyVote downVote (@RequestBody MyVote myVote) {
+        return koraService.downVote(myVote);
+    }
+
     @GetMapping ("/kora/quesAllAns/{quesId}")
     private Pair<Integer, List<Answer>> seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
         return koraService.seeAllAnsOfQues(quesId);
