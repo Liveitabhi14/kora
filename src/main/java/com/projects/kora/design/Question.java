@@ -13,10 +13,6 @@ public class Question extends QAModel{
     @Column(name="ques_body",nullable = false)
     private String quesBody;
 
-
-    public Question() {
-    }
-
     public int getQuesId() {
         return quesId;
     }

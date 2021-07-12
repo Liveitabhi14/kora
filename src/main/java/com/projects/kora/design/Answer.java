@@ -24,16 +24,6 @@ public class Answer extends QAModel{
     @Column(columnDefinition = "integer default 0")
     private int downVoteSum;
 
-    public Answer() {
-
-    }
-    public Answer(Date createdAt, Date updatedAt, int userId, String ansBody, int quesId, int upVoteSum, int downVoteSum) {
-        super(createdAt, updatedAt, userId);
-        this.ansBody = ansBody;
-        this.quesId = quesId;
-        this.upVoteSum = upVoteSum;
-        this.downVoteSum = downVoteSum;
-    }
 
     public int getAnsId() {
         return ansId;

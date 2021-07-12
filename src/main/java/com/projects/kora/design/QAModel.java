@@ -1,10 +1,12 @@
 package com.projects.kora.design;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class QAModel {
 
@@ -21,14 +23,6 @@ public class QAModel {
     @Column(name="user_id", nullable=true)
     private int userId;
 
-    public QAModel(Date createdAt, Date updatedAt, int userId) {
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.userId = userId;
-    }
-
-    public QAModel() {
-    }
 
     public Date getCreatedAt() {
         return createdAt;

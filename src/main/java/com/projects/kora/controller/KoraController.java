@@ -32,15 +32,13 @@ public class KoraController {
 //    }
 
     @PostMapping ("/kora/postQues")
-    private int saveQuestion (@RequestBody Question question) {
-        koraService.saveQuestion(question);
-        return question.getQuesId();
+    private Question saveQuestion (@RequestBody Question question) {
+        return koraService.saveQuestion(question);
     }
 
     @PostMapping ("/kora/postAns")
-    private int saveAnswer (@RequestBody Answer answer) {
-        koraService.saveAnswer(answer);
-        return answer.getAnsId();
+    private Answer saveAnswer (@RequestBody Answer answer) {
+        return koraService.saveAnswer(answer);
     }
 
     @GetMapping ("/kora/viewQues")

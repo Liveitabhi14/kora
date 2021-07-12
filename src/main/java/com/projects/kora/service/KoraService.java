@@ -37,12 +37,12 @@ public class KoraService {
 //        return "You have been signed in successfully";
 //    }
 
-    public void saveQuestion ( Question question) {
-        questionRepository.save(question);
+    public Question saveQuestion ( Question question) {
+        return questionRepository.save(question);
     }
 
-    public void saveAnswer ( Answer answer ) {
-        answerRepository.save( answer);
+    public Answer saveAnswer ( Answer answer ) {
+        return answerRepository.save( answer);
     }
 
     public List<Question> listViewOfQuestion (int page) {
@@ -73,6 +73,9 @@ public class KoraService {
         Answer answer = answerList.get(0);
         if ( myVote2 == null ) {
             answer.setUpVoteSum( answer.getUpVoteSum() + 1 );
+            myVote.setUpVote(1);
+            myVote.setDownVote(0);
+            return myVoteRepository.save(myVote);
         }
         else {
             if (myVote2.getUpVote() == 0) {
@@ -83,10 +86,10 @@ public class KoraService {
             }
         }
 
-        myVote.setUpVote(1);
-        myVote.setDownVote(0);
-        MyVote myVote1 = (MyVote) myVoteRepository.save(myVote);
-        return myVote1;
+        myVote2.setUpVote(1);
+        myVote2.setDownVote(0);
+
+        return myVote2;
     }
 
     public MyVote downVote ( MyVote myVote ) {
@@ -102,6 +105,9 @@ public class KoraService {
         Answer answer = answerList.get(0);
         if( myVote2 == null ) {
             answer.setDownVoteSum( answer.getDownVoteSum() + 1 );
+            myVote.setDownVote(1);
+            myVote.setUpVote(0);
+            return myVoteRepository.save(myVote);
         }
         else {
             if (myVote2.getDownVote() == 0) {
@@ -112,10 +118,9 @@ public class KoraService {
             }
         }
 
-        myVote.setDownVote(1);
-        myVote.setUpVote(0);
-        MyVote myVote1 = (MyVote) myVoteRepository.save(myVote);
-        return myVote1;
+        myVote2.setDownVote(1);
+        myVote2.setUpVote(0);
+        return myVote2;
     }
 
     public Pair<Integer ,List<Answer> > seeAllAnsOfQues (int quesId) {
