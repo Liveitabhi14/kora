@@ -16,22 +16,22 @@ public class MyVote {
     private int userId;
 
     @Column(name="upvote",nullable = false)
-    private int upvote;
+    private int upVote = 0;
 
     @Column(name="downvote",nullable = false)
-    private int downvote;
+    private int downVote = 0;
 
     public MyVote() {
-        this.upvote = 0;
-        this.downvote = 0;
+        this.upVote = 0;
+        this.downVote = 0;
     }
 
-    public MyVote(int voteId, int ansId, int userId, int upvote, int downvote) {
+    public MyVote(int voteId, int ansId, int userId, int upVote, int downVote) {
         this.voteId = voteId;
         this.ansId = ansId;
         this.userId = userId;
-        this.upvote = upvote;
-        this.downvote = downvote;
+        this.upVote = upVote;
+        this.downVote = downVote;
     }
 
     public int getVoteId() {
@@ -58,19 +58,19 @@ public class MyVote {
         this.userId = userId;
     }
 
-    public int getUpvote() {
-        return upvote;
+    public int getUpVote() {
+        return upVote;
     }
 
-    public void setUpvote(int upvote) {
-        this.upvote = upvote;
+    public void setUpVote(int upVote) {
+        this.upVote = upVote;
     }
 
-    public int getDownvote() {
-        return downvote;
+    public int getDownVote() {
+        return downVote;
     }
 
-    public void setDownvote(int downvote) {
-        this.downvote = downvote;
+    public void setDownVote(int downVote) {
+        this.downVote = downVote;
     }
 }
