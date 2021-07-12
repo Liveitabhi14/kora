@@ -1,5 +1,6 @@
 package com.projects.kora.auth.config;
 
+import com.projects.kora.auth.service.AuthUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,19 +24,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private AuthEntryPoint authEntryPoint;
 
     @Autowired
-    private UserDetailsService jwtUserDetailsService;
+    private AuthUserDetailsService authUserDetailsService;
 
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private AuthRequestFilter authRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         // configure AuthenticationManager so that it knows from where to load user for matching credentials
         // Use BCryptPasswordEncoder
-        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(authUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -71,12 +72,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 // make sure to use stateless session
                 .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .authenticationEntryPoint(authEntryPoint)
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Add a filter to validate the tokens with every request
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(authRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

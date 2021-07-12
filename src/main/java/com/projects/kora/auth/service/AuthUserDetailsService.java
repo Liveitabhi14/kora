@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class AuthUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;

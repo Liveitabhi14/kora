@@ -1,6 +1,6 @@
 package com.projects.kora.auth.config;
 
-import com.projects.kora.auth.service.JwtUserDetailsService;
+import com.projects.kora.auth.service.AuthUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class AuthRequestFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUserDetailsService jwtUserDetailsService;
+    private AuthUserDetailsService userDetailsService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -32,13 +32,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
-        String jwtToken = null;
+        String authToken = null;
 
-        // Remove "Bearer" from JwtToken to get token
+        // Remove "Bearer" from AuthToken to get token
         if(requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+            authToken = requestTokenHeader.substring(7);
             try {
-                username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                username = jwtTokenUtil.getUsernameFromToken(authToken);
             } catch(IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
             } catch(ExpiredJwtException e) {
@@ -51,10 +51,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         // Once we get the token, validate it.
         if(username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
             // if token is valid, configure Spring security to manually set authentication
-            if(jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+            if(jwtTokenUtil.validateToken(authToken, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails((new WebAuthenticationDetailsSource().buildDetails(request)));
 

@@ -1,16 +1,16 @@
 package com.projects.kora.auth.model;
 
-public class JwtRequest {
+public class AuthRequest {
 
     private String username;
     private String password;
 
     // default constructor needed for JSON parsing
-    public JwtRequest() {
+    public AuthRequest() {
 
     }
 
-    public JwtRequest(String username, String password) {
+    public AuthRequest(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);
     }
