@@ -1,5 +1,8 @@
 package com.projects.kora.auth.config;
 
+import com.oracle.tools.packager.Log;
+import io.jsonwebtoken.impl.DefaultClaims;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -39,7 +42,12 @@ public class JwtTokenUtil {
     }
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        try {
+            return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+        } catch(Exception e) {
+            System.out.println("Error parsing token");
+            return new DefaultClaims();
+        }
     }
 
     private Boolean isTokenExpired(String token) {
