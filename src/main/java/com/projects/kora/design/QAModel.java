@@ -24,6 +24,8 @@ public class QAModel {
     private int userId;
 
 
+
+
     public Date getCreatedAt() {
         return createdAt;
     }

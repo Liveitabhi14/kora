@@ -1,5 +1,9 @@
 package com.projects.kora.design;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.Date;
@@ -23,7 +27,6 @@ public class Answer extends QAModel{
 
     @Column(columnDefinition = "integer default 0")
     private int downVoteSum;
-
 
     public int getAnsId() {
         return ansId;
