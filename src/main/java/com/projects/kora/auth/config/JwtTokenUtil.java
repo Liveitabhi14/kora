@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class JwtTokenUtil {
+public class JwtTokenUtil implements TokenUtil{
 
     public static final long JWT_TOKEN_VALIDITY = 5*60*60;
 
