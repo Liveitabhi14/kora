@@ -29,14 +29,6 @@ public class KoraService {
         return "Welcome to Kora";
     }
 
-//    public String userLogin() {
-//        return "You have been logged in successfully";
-//    }
-//
-//    public String userSignup() {
-//        return "You have been signed in successfully";
-//    }
-
     public Question saveQuestion ( Question question) {
         return questionRepository.save(question);
     }
@@ -46,19 +38,23 @@ public class KoraService {
     }
 
     public List<Question> listViewOfQuestion (int page) {
-//        List<Question> questions = new ArrayList<Question>();
-//        Iterable<Question> temp = questionRepository.findAll();
-//        temp.forEach(questions::add);
-//        return questions;
-
         Pageable currPage = PageRequest.of(page,20);
         Page<Question> questions = questionRepository.findAll(currPage);
         return questions.getContent();
     }
 
-//    public LinkedHashMap<Question,List<Answer> listViewOfQuesAnsTop5 () {
-//
-//    }
+
+    public LinkedHashMap<String ,List<Answer>> listViewOfQuesAnsTop5 () {
+        LinkedHashMap< String,List<Answer> >  result = new LinkedHashMap<>();
+        List<Integer> quesIdList = answerRepository.findAllDistinctQuesId();
+        for (Integer quesId : quesIdList ) {
+            List<Answer> answerList = answerRepository.findTop5ByQuesIdOrderByUpVoteSumDesc(quesId);
+            List<Question> questionList = questionRepository.findByQuesId(quesId);
+            Question question = questionList.get(0);
+            result.put(question.getQuesBody(),answerList);
+        }
+        return result;
+    }
 
     public MyVote upVote ( MyVote myVote ) {
         int ansId = myVote.getAnsId();
@@ -88,7 +84,6 @@ public class KoraService {
 
         myVote2.setUpVote(1);
         myVote2.setDownVote(0);
-
         return myVoteRepository.save(myVote2);
     }
 
@@ -123,9 +118,11 @@ public class KoraService {
         return myVoteRepository.save(myVote2);
     }
 
-    public List<Answer>  seeAllAnsOfQues (int quesId) {
+    public Pair< String , List<Answer> > seeAllAnsOfQues (int quesId) {
         List<Answer> temp = answerRepository.findByquesId(quesId);
-        return temp;
+        List<Question> questionList = questionRepository.findByQuesId(quesId);
+        Question question = questionList.get(0);
+        return new Pair( question.getQuesBody(),temp );
     }
 
 }

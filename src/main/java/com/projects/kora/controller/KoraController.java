@@ -21,16 +21,6 @@ public class KoraController {
         return koraService.welcomeMessage();
     }
 
-//    @PostMapping ("/kora/login")
-//    private String userLogin (@RequestBody User user) {
-//        return koraService.userLogin();
-//    }
-//
-//    @PostMapping ("/kora/signup")
-//    private String userSignup (@RequestBody User user) {
-//        return koraService.userSignup();
-//    }
-
     @PostMapping ("/kora/postQues")
     private Question saveQuestion (@RequestBody Question question) {
         return koraService.saveQuestion(question);
@@ -46,11 +36,11 @@ public class KoraController {
         return koraService.listViewOfQuestion(page);
     }
 
-//    @GetMapping ("/kora/viewQuesAns")
-//    private LinkedHashMap<Question,List<Answer>> listViewOfQuesAnsTop5 () {
-//        return koraService.listViewOfQuesAnsTop5();
-//    }
-//
+    @GetMapping ("/kora/viewQuesAns")
+    private LinkedHashMap<String,List<Answer>> listViewOfQuesAnsTop5 () {
+        return koraService.listViewOfQuesAnsTop5();
+    }
+
     @PostMapping ("/kora/upVote")
     private MyVote upVote (@RequestBody MyVote myVote) {
         return koraService.upVote(myVote);
@@ -62,7 +52,7 @@ public class KoraController {
     }
 
     @GetMapping ("/kora/quesAllAns/{quesId}")
-    private List<Answer> seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
+    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
         return koraService.seeAllAnsOfQues(quesId);
     }
 
