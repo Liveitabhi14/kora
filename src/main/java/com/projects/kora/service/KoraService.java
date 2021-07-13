@@ -64,6 +64,7 @@ public class KoraService {
 //        return "Down voted";
 //    }
 //
+    ///  just for check controller
     public Pair<Integer ,List<Answer> > seeAllAnsOfQues (int quesId) {
         List<Answer> temp = answerRepository.findByquesId(quesId);
         return new Pair(quesId,temp);
