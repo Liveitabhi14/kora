@@ -1,5 +1,10 @@
 package com.projects.kora.design;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projects.kora.auth.model.UserDAO;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.Date;
@@ -15,8 +20,8 @@ public class Answer extends QAModel{
     @Column (name = "ans_body",nullable = false)
     private String ansBody;
 
-    @Column(name="ques_id",nullable = false)
-    private int quesId;
+//    @Column(name="ques_id",nullable = false)
+//    private int quesId;
 
     @Column(columnDefinition = "integer default 0")
     private int upVoteSum;
@@ -24,6 +29,25 @@ public class Answer extends QAModel{
     @Column(columnDefinition = "integer default 0")
     private int downVoteSum;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ques_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Question question;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    private UserDAO user1;
+//
+//    public UserDAO getUser() {
+//        return user1;
+//    }
+//
+//    public void setUser(UserDAO user1) {
+//        this.user1 = user1;
+//    }
 
     public int getAnsId() {
         return ansId;
@@ -41,12 +65,12 @@ public class Answer extends QAModel{
         this.ansBody = ansBody;
     }
 
-    public int getQuesId() {
-        return quesId;
+    public Question getQuestion() {
+        return question;
     }
 
-    public void setQuesId(int quesId) {
-        this.quesId = quesId;
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     public int getUpVoteSum() {

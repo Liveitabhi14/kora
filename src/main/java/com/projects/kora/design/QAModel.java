@@ -1,5 +1,10 @@
 package com.projects.kora.design;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.projects.kora.auth.model.UserDAO;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,9 +25,14 @@ public class QAModel {
     @Column(name="updated_at",nullable=true)
     private Date updatedAt;
 
-    @Column(name="user_id", nullable=true)
-    private int userId;
+//    @Column(name="user_id", nullable=true)
+//    private int userId;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private UserDAO user1;
 
     public Date getCreatedAt() {
         return createdAt;
@@ -40,11 +50,11 @@ public class QAModel {
         this.updatedAt = updatedAt;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserDAO getUser() {
+        return user1;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserDAO user1) {
+        this.user1 = user1;
     }
 }

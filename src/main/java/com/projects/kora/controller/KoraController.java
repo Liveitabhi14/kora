@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -26,34 +27,34 @@ public class KoraController {
         return koraService.saveQuestion(question);
     }
 
-    @PostMapping ("/kora/postAns")
-    private Answer saveAnswer (@RequestBody Answer answer) {
-        return koraService.saveAnswer(answer);
+    @PostMapping ("/kora/postAns/{quesId}")
+    private Answer saveAnswer (@PathVariable Integer quesId, @RequestBody Answer answer) {
+        return koraService.saveAnswer(quesId, answer);
     }
 
-    @GetMapping ("/kora/viewQues")
-    private List<Question> listViewOfQuestion ( @RequestParam(value = "page",defaultValue = "0" ) int page) {
-        return koraService.listViewOfQuestion(page);
+//    @GetMapping ("/kora/viewQues")
+//    private List<Question> listViewOfQuestion ( @RequestParam(value = "page",defaultValue = "0" ) int page) {
+//        return koraService.listViewOfQuestion(page);
+//    }
+//
+//    @GetMapping ("/kora/viewQuesAns")
+//    private LinkedHashMap<String,List<Answer>> listViewOfQuesAnsTop5 () {
+//        return koraService.listViewOfQuesAnsTop5();
+//    }
+//
+    @PostMapping ("/kora/upVote/{ansId}")
+    private MyVote upVote (@PathVariable Integer ansId) {
+        return koraService.upVote(ansId);
     }
 
-    @GetMapping ("/kora/viewQuesAns")
-    private LinkedHashMap<String,List<Answer>> listViewOfQuesAnsTop5 () {
-        return koraService.listViewOfQuesAnsTop5();
+    @PostMapping ("/kora/downVote/{ansId}")
+    private MyVote downVote (@PathVariable Integer ansId) {
+        return koraService.downVote(ansId);
     }
-
-    @PostMapping ("/kora/upVote")
-    private MyVote upVote (@RequestBody MyVote myVote) {
-        return koraService.upVote(myVote);
-    }
-
-    @PostMapping ("/kora/downVote")
-    private MyVote downVote (@RequestBody MyVote myVote) {
-        return koraService.downVote(myVote);
-    }
-
-    @GetMapping ("/kora/quesAllAns/{quesId}")
-    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
-        return koraService.seeAllAnsOfQues(quesId);
-    }
+//
+//    @GetMapping ("/kora/quesAllAns/{quesId}")
+//    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
+//        return koraService.seeAllAnsOfQues(quesId);
+//    }
 
 }

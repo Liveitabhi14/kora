@@ -1,5 +1,10 @@
 package com.projects.kora.design;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.projects.kora.auth.model.UserDAO;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,11 +14,23 @@ public class MyVote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int voteId;
 
-    @Column(name = "ans_id",nullable = true)
-    private int ansId;
+//    @Column(name = "ans_id",nullable = true)
+//    private int ansId;
 
-    @Column(name="user_id",nullable = true)
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ans_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Answer answer;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private UserDAO user1;
+
+//    @Column(name="user_id",nullable = true)
+//    private int userId;
 
     @Column(name="upvote",nullable = true)
     private int upVote;
@@ -21,18 +38,7 @@ public class MyVote {
     @Column(name="downvote",nullable = true)
     private int downVote;
 
-    public MyVote() {
-        this.upVote = 0;
-        this.downVote = 0;
-    }
 
-    public MyVote(int voteId, int ansId, int userId, int upVote, int downVote) {
-        this.voteId = voteId;
-        this.ansId = ansId;
-        this.userId = userId;
-        this.upVote = upVote;
-        this.downVote = downVote;
-    }
 
     public int getVoteId() {
         return voteId;
@@ -42,20 +48,20 @@ public class MyVote {
         this.voteId = voteId;
     }
 
-    public int getAnsId() {
-        return ansId;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public void setAnsId(int ansId) {
-        this.ansId = ansId;
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
     }
 
-    public int getUserId() {
-        return userId;
+    public UserDAO getUser() {
+        return user1;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserDAO user1) {
+        this.user1 = user1;
     }
 
     public int getUpVote() {
@@ -74,14 +80,5 @@ public class MyVote {
         this.downVote = downVote;
     }
 
-    @Override
-    public String toString() {
-        return "MyVote{" +
-                "voteId=" + voteId +
-                ", ansId=" + ansId +
-                ", userId=" + userId +
-                ", upVote=" + upVote +
-                ", downVote=" + downVote +
-                '}';
-    }
+
 }
