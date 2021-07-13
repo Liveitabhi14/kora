@@ -1,5 +1,7 @@
 package com.projects.kora.service;
 
+import com.projects.kora.auth.config.JwtTokenUtil;
+import com.projects.kora.auth.service.AuthUserDetailsService;
 import com.projects.kora.design.Answer;
 import com.projects.kora.design.MyVote;
 import com.projects.kora.design.Question;
@@ -24,16 +26,24 @@ public class KoraService {
     AnswerRepository answerRepository;
     @Autowired
     MyVoteRepository myVoteRepository;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    AuthUserDetailsService authUserDetailsService;
 
     public String welcomeMessage() {
         return "Welcome to Kora";
     }
 
+    private int getUserId() { return authUserDetailsService.getUserIdByUsername(jwtTokenUtil.username); }
+
     public Question saveQuestion ( Question question) {
+        question.setUserId(getUserId());
         return questionRepository.save(question);
     }
 
     public Answer saveAnswer ( Answer answer ) {
+        answer.setUserId(getUserId());
         return answerRepository.save( answer);
     }
 
@@ -57,6 +67,8 @@ public class KoraService {
     }
 
     public MyVote upVote ( MyVote myVote ) {
+        myVote.setUserId(getUserId());
+
         int ansId = myVote.getAnsId();
         int userId = myVote.getUserId();
         MyVote myVote2 = myVoteRepository.findByAnsIdAndUserId(ansId,userId);
@@ -88,6 +100,8 @@ public class KoraService {
     }
 
     public MyVote downVote ( MyVote myVote ) {
+        myVote.setUserId(getUserId());
+
         int ansId = myVote.getAnsId();
         int userId = myVote.getUserId();
         MyVote myVote2 = myVoteRepository.findByAnsIdAndUserId(ansId,userId);

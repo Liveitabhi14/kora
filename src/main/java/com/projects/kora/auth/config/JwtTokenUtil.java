@@ -1,8 +1,6 @@
 package com.projects.kora.auth.config;
 
-import com.oracle.tools.packager.Log;
 import io.jsonwebtoken.impl.DefaultClaims;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,17 +18,17 @@ import java.util.function.Function;
 public class JwtTokenUtil implements TokenUtil{
 
     public static final long JWT_TOKEN_VALIDITY = 5*60*60;
+    public String username = null;
 
     @Value("{$jwt.secret}")
     private String secret;
 
     public String getUsernameFromToken(String token) {
-        return getClaimFromToken(token, Claims::getSubject);
+        username = getClaimFromToken(token, Claims::getSubject);
+        return username;
     }
 
-    public Date getIssuedAtDateFromToken(String token) {
-        return getClaimFromToken(token, Claims::getIssuedAt);
-    }
+    public Date getIssuedAtDateFromToken(String token) { return getClaimFromToken(token, Claims::getIssuedAt); }
 
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);

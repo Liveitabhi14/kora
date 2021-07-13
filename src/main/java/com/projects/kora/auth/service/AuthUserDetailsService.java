@@ -27,13 +27,18 @@ public class AuthUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         UserDAO user = userRepository.findByUsername(username);
-//        if("kora".equals(username)) {
-//            return new User("kora", "$2a$10$VH13WslwBNQe5zoOjPUzhuu0q3AGoIrOxG3JuEf3tGP8vKX9Pd3.S", new ArrayList<>());
-//        }
         if(user == null) {
             throw new UsernameNotFoundException("User not found with username:" + username);
         }
         return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+    }
+
+    public int getUserIdByUsername(String username) throws UsernameNotFoundException {
+        UserDAO user = userRepository.findByUsername(username);
+        if(user == null) {
+            throw new UsernameNotFoundException("User not found with username:" + username);
+        }
+        return user.getUserId();
     }
 
     public UserDTO saveUser(UserDTO user) {
