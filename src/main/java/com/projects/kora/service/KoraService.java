@@ -84,7 +84,7 @@ public class KoraService {
 
         myVote2.setUpVote(1);
         myVote2.setDownVote(0);
-        return myVote2;
+        return myVoteRepository.save(myVote2);
     }
 
     public MyVote downVote ( MyVote myVote ) {
@@ -115,7 +115,7 @@ public class KoraService {
 
         myVote2.setDownVote(1);
         myVote2.setUpVote(0);
-        return myVote2;
+        return myVoteRepository.save(myVote2);
     }
 
     public Pair< String , List<Answer> > seeAllAnsOfQues (int quesId) {
