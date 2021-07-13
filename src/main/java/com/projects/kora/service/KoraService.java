@@ -77,7 +77,7 @@ public class KoraService {
 //
     public MyVote upVote ( Integer ansId ) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
-        MyVote myVote = myVoteRepository.findByAnsIdAndUserId(ansId, getUserId());
+        MyVote myVote = myVoteRepository.findByAnswer_ansIdAndUser1_userId(ansId, getUserId());
         Answer answer = answerRepository.findByAnsId(ansId);
 
         if ( myVote == null ) {
@@ -86,6 +86,7 @@ public class KoraService {
             myVote.setUpVote(1);
             myVote.setDownVote(0);
             answer.setUpVoteSum( answer.getUpVoteSum() + 1 );
+            myVote.setAnswer(answer);
             answerRepository.save(answer);
             return myVoteRepository.save(myVote);
         }
@@ -103,7 +104,7 @@ public class KoraService {
 
     public MyVote downVote ( Integer ansId ) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
-        MyVote myVote = myVoteRepository.findByAnsIdAndUserId(ansId, getUserId());
+        MyVote myVote = myVoteRepository.findByAnswer_ansIdAndUser1_userId(ansId, getUserId());
         Answer answer = answerRepository.findByAnsId(ansId);
 
         if ( myVote == null ) {
@@ -111,6 +112,7 @@ public class KoraService {
             myVote.setUser(user1);
             myVote.setUpVote(0);
             myVote.setDownVote(1);
+            myVote.setAnswer(answer);
             answer.setUpVoteSum( answer.getDownVoteSum() + 1 );
             answerRepository.save(answer);
             return myVoteRepository.save(myVote);
