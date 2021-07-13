@@ -32,16 +32,16 @@ public class KoraController {
         return koraService.saveAnswer(quesId, answer);
     }
 
-//    @GetMapping ("/kora/viewQues")
-//    private List<Question> listViewOfQuestion ( @RequestParam(value = "page",defaultValue = "0" ) int page) {
-//        return koraService.listViewOfQuestion(page);
-//    }
-//
+    @GetMapping ("/kora/viewQues")
+    private List<Question> listViewOfQuestion ( @RequestParam(value = "page",defaultValue = "0" ) int page) {
+        return koraService.listViewOfQuestion(page);
+    }
+
 //    @GetMapping ("/kora/viewQuesAns")
 //    private LinkedHashMap<String,List<Answer>> listViewOfQuesAnsTop5 () {
 //        return koraService.listViewOfQuesAnsTop5();
 //    }
-//
+
     @PostMapping ("/kora/upVote/{ansId}")
     private MyVote upVote (@PathVariable Integer ansId) {
         return koraService.upVote(ansId);
@@ -51,10 +51,10 @@ public class KoraController {
     private MyVote downVote (@PathVariable Integer ansId) {
         return koraService.downVote(ansId);
     }
-//
-//    @GetMapping ("/kora/quesAllAns/{quesId}")
-//    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable("quesId") int quesId ) {
-//        return koraService.seeAllAnsOfQues(quesId);
-//    }
+
+    @GetMapping ("/kora/quesAllAns/{quesId}")
+    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable int quesId ) {
+        return koraService.seeAllAnsOfQues(quesId);
+    }
 
 }

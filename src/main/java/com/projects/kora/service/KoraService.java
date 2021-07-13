@@ -56,25 +56,23 @@ public class KoraService {
         return answerRepository.save(answer);
     }
 
-//    public List<Question> listViewOfQuestion (int page) {
-//        Pageable currPage = PageRequest.of(page,20);
-//        Page<Question> questions = questionRepository.findAll(currPage);
-//        return questions.getContent();
-//    }
-//
-//
+    public List<Question> listViewOfQuestion (int page) {
+        Pageable currPage = PageRequest.of(page,20);
+        Page<Question> questions = questionRepository.findAll(currPage);
+        return questions.getContent();
+    }
+
+
 //    public LinkedHashMap<String ,List<Answer>> listViewOfQuesAnsTop5 () {
 //        LinkedHashMap< String,List<Answer> >  result = new LinkedHashMap<>();
-//        List<Integer> quesIdList = answerRepository.findAllDistinctQuesId();
-//        for (Integer quesId : quesIdList ) {
-//            List<Answer> answerList = answerRepository.findTop5ByQuesIdOrderByUpVoteSumDesc(quesId);
-//            List<Question> questionList = questionRepository.findByQuesId(quesId);
-//            Question question = questionList.get(0);
+//        List<Question> quesIdList = answerRepository.findAllDistinctQuesId();
+//        for (Question question : quesIdList ) {
+//            List<Answer> answerList = answerRepository.findTop5ByQuestion_quesIdOrderByUpVoteSumDesc(question.getQuesId());
 //            result.put(question.getQuesBody(),answerList);
 //        }
 //        return result;
 //    }
-//
+
     public MyVote upVote ( Integer ansId ) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
         MyVote myVote = myVoteRepository.findByAnswer_ansIdAndUser1_userId(ansId, getUserId());
@@ -128,12 +126,11 @@ public class KoraService {
         answerRepository.save(answer);
         return myVoteRepository.save(myVote);
     }
-//
-//    public Pair< String , List<Answer> > seeAllAnsOfQues (int quesId) {
-//        List<Answer> temp = answerRepository.findByquesId(quesId);
-//        List<Question> questionList = questionRepository.findByQuesId(quesId);
-//        Question question = questionList.get(0);
-//        return new Pair( question.getQuesBody(),temp );
-//    }
+
+    public Pair< String , List<Answer> > seeAllAnsOfQues (int quesId) {
+        List<Answer> temp = answerRepository.findByQuestion_quesId(quesId);
+        Question question = questionRepository.findByQuesId(quesId);
+        return new Pair( question.getQuesBody(),temp );
+    }
 
 }
