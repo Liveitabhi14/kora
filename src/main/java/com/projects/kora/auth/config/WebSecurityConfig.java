@@ -64,7 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 // don't authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/register", "/kora", "/kora/viewQues", "/kora/quesAllAns/*")
+                .antMatchers("/login", "/register", "/kora",
+                        "/kora/question/{quesId}/answer/all",
+                        "/kora/question/all",
+                        "/kora/question/all/answer/top5")
                 .permitAll()
                 // all other requests need to be authenticated
                 .anyRequest()

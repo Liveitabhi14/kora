@@ -22,39 +22,39 @@ public class KoraController {
         return koraService.welcomeMessage();
     }
 
-    @PostMapping ("/kora/postQues")
+    @PostMapping ("/kora/question")
     private Question saveQuestion (@RequestBody Question question) {
         return koraService.saveQuestion(question);
     }
 
-    @PostMapping ("/kora/postAns/{quesId}")
+    @PostMapping ("/kora/question/{quesId}/answer")
     private Answer saveAnswer (@PathVariable Integer quesId, @RequestBody Answer answer) {
         return koraService.saveAnswer(quesId, answer);
     }
 
-    @GetMapping ("/kora/viewQues")
+    @GetMapping ("/kora/question/all")
     private List<Question> listViewOfQuestion ( @RequestParam(value = "page",defaultValue = "0" ) int page) {
         return koraService.listViewOfQuestion(page);
     }
 
-//    @GetMapping ("/kora/viewQuesAns")
-//    private LinkedHashMap<String,List<Answer>> listViewOfQuesAnsTop5 () {
-//        return koraService.listViewOfQuesAnsTop5();
-//    }
+    @GetMapping ("/kora/question/{quesId}/answer/all")
+    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable int quesId ) {
+        return koraService.seeAllAnsOfQues(quesId);
+    }
 
-    @PostMapping ("/kora/upVote/{ansId}")
+    @GetMapping ("/kora/question/all/answer/top5")
+    private LinkedHashMap<String,List<Answer>> listViewOfQuesAnsTop5 () {
+        return koraService.listViewOfQuesAnsTop5();
+    }
+
+    @PostMapping ("/kora/upVote/answer/{ansId}")
     private MyVote upVote (@PathVariable Integer ansId) {
         return koraService.upVote(ansId);
     }
 
-    @PostMapping ("/kora/downVote/{ansId}")
+    @PostMapping ("/kora/downVote/answer/{ansId}")
     private MyVote downVote (@PathVariable Integer ansId) {
         return koraService.downVote(ansId);
-    }
-
-    @GetMapping ("/kora/quesAllAns/{quesId}")
-    private Pair< String , List<Answer> > seeAllAnsOfQues (@PathVariable int quesId ) {
-        return koraService.seeAllAnsOfQues(quesId);
     }
 
 }

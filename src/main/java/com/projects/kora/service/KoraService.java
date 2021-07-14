@@ -63,15 +63,15 @@ public class KoraService {
     }
 
 
-//    public LinkedHashMap<String ,List<Answer>> listViewOfQuesAnsTop5 () {
-//        LinkedHashMap< String,List<Answer> >  result = new LinkedHashMap<>();
-//        List<Question> quesIdList = answerRepository.findAllDistinctQuesId();
-//        for (Question question : quesIdList ) {
-//            List<Answer> answerList = answerRepository.findTop5ByQuestion_quesIdOrderByUpVoteSumDesc(question.getQuesId());
-//            result.put(question.getQuesBody(),answerList);
-//        }
-//        return result;
-//    }
+    public LinkedHashMap<String ,List<Answer>> listViewOfQuesAnsTop5 () {
+        LinkedHashMap< String,List<Answer> >  result = new LinkedHashMap<>();
+        List<Question> questionList = answerRepository.findAllDistinctQuesId();
+        for (Question question : questionList ) {
+            List<Answer> top5AnswerList = answerRepository.findTop5ByQuestion_quesIdOrderByUpVoteSumDesc(question.getQuesId());
+            result.put(question.getQuesBody(), top5AnswerList);
+        }
+        return result;
+    }
 
     public MyVote upVote ( Integer ansId ) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
@@ -111,7 +111,7 @@ public class KoraService {
             myVote.setUpVote(0);
             myVote.setDownVote(1);
             myVote.setAnswer(answer);
-            answer.setUpVoteSum( answer.getDownVoteSum() + 1 );
+            answer.setDownVoteSum( answer.getDownVoteSum() + 1 );
             answerRepository.save(answer);
             return myVoteRepository.save(myVote);
         }

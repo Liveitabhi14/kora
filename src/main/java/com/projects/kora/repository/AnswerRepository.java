@@ -15,7 +15,10 @@ public interface AnswerRepository extends JpaRepository<Answer,Integer> {
 
     List<Answer> findTop5ByQuestion_quesIdOrderByUpVoteSumDesc(int i);
 
-//    @Query("SELECT DISTINCT Question from Answer")
-//    List<Question> findAllDistinctQuesId();
+//    List<Integer> findDistinctQuesId();
+
+
+    @Query("SELECT DISTINCT a.question from Answer a")
+    List<Question> findAllDistinctQuesId();
 }
 

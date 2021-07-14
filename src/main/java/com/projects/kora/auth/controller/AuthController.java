@@ -31,7 +31,7 @@ public class AuthController {
     @Autowired
     private AuthUserDetailsService authUserDetailsService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest)
             throws Exception {
 
