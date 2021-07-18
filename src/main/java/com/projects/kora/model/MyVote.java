@@ -1,4 +1,4 @@
-package com.projects.kora.design;
+package com.projects.kora.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projects.kora.auth.model.UserDAO;

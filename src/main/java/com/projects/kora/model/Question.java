@@ -1,4 +1,7 @@
-package com.projects.kora.design;
+package com.projects.kora.model;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 //import javax.validation.constraints.NotNull;
@@ -13,7 +16,18 @@ public class Question extends QAModel{
     @Column(name="ques_body",nullable = false)
     private String quesBody;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cat_name", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Category category;
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public int getQuesId() {
         return quesId;

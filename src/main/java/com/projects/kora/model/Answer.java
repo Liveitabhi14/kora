@@ -1,13 +1,10 @@
-package com.projects.kora.design;
+package com.projects.kora.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.projects.kora.auth.model.UserDAO;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table

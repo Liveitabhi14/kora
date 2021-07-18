@@ -3,7 +3,7 @@ package com.projects.kora.auth.service;
 import com.projects.kora.auth.model.UserDAO;
 import com.projects.kora.auth.model.UserDTO;
 import com.projects.kora.auth.repository.UserRepository;
-
+import com.projects.kora.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AuthUserDetailsService implements UserDetailsService {
@@ -22,6 +23,9 @@ public class AuthUserDetailsService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -57,7 +61,19 @@ public class AuthUserDetailsService implements UserDetailsService {
         newUser.setLastName(user.getLastName());
         newUser.setDob(user.getDob());
         newUser.setGender(user.getGender());
+        List<String> list = user.getCatList();
+        newUser.setBitmapOfCategory(convertToBitmap(list));
         return newUser;
+    }
+
+    private Integer convertToBitmap(List<String> list){
+        int bitmapValue = 0;
+
+        for (String cat : list){
+            bitmapValue += (int) Math.pow(2,categoryRepository.findBitmapIdByCatName(cat)-1);
+        }
+
+        return bitmapValue;
     }
 
     private UserDTO daoToDto(UserDAO user) {

@@ -35,6 +35,17 @@ public class UserDAO {
     @Column
     private String gender;
 
+    @Column
+    private int bitmapOfCategory;
+
+    public int getBitmapOfCategory() {
+        return bitmapOfCategory;
+    }
+
+    public void setBitmapOfCategory(int bitmapOfCategory) {
+        this.bitmapOfCategory = bitmapOfCategory;
+    }
+
     public int getUserId() {
         return userId;
     }

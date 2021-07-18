@@ -1,14 +1,13 @@
 package com.projects.kora.controller;
 
-import com.projects.kora.design.Answer;
-import com.projects.kora.design.MyVote;
-import com.projects.kora.design.Question;
+import com.projects.kora.model.Answer;
+import com.projects.kora.model.MyVote;
+import com.projects.kora.model.Question;
 import com.projects.kora.service.KoraService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.LinkedHashMap;
 import java.util.List;
 

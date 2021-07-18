@@ -1,7 +1,6 @@
-package com.projects.kora.design;
+package com.projects.kora.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.projects.kora.auth.model.UserDAO;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

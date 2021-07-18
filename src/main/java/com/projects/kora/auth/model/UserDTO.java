@@ -1,6 +1,7 @@
 package com.projects.kora.auth.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserDTO {
     private int userId;
@@ -11,6 +12,15 @@ public class UserDTO {
     private String lastName;
     private Date dob;
     private String gender;
+    private List<String> catList;
+
+    public List<String> getCatList() {
+        return catList;
+    }
+
+    public void setCatList(List<String> catList) {
+        this.catList = catList;
+    }
 
     public int getUserId() {
         return userId;
