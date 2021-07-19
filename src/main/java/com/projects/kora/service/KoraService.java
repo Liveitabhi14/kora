@@ -4,13 +4,10 @@ import com.projects.kora.auth.config.JwtTokenUtil;
 import com.projects.kora.auth.model.UserDAO;
 import com.projects.kora.auth.repository.UserRepository;
 import com.projects.kora.auth.service.AuthUserDetailsService;
-import com.projects.kora.model.Answer;
-import com.projects.kora.model.MyVote;
-import com.projects.kora.model.Question;
-import com.projects.kora.repository.AnswerRepository;
-import com.projects.kora.repository.MyVoteRepository;
-import com.projects.kora.repository.QuestionRepository;
+import com.projects.kora.model.*;
+import com.projects.kora.repository.*;
 import javafx.util.Pair;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +31,10 @@ public class KoraService {
     JwtTokenUtil jwtTokenUtil;
     @Autowired
     AuthUserDetailsService authUserDetailsService;
+    @Autowired
+    EventRepository eventRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     public String welcomeMessage() {
         return "Welcome to Kora";
@@ -44,6 +45,8 @@ public class KoraService {
     public Question saveQuestion ( Question question) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
         //question.setUserId(getUserId());
+        Category category = categoryRepository.findByCatName(question.getCategoryName());
+        question.setCategory(category);
         question.setUser(user1);
         return questionRepository.save(question);
     }
@@ -53,7 +56,19 @@ public class KoraService {
         answer.setUser(user1);
         Question question = questionRepository.findByQuesId(quesId);
         answer.setQuestion(question);
+
+//        Notification notification = new Notification();
+//        notification.setEvent(eventRepository.findByEventType("Answer posted"));
+//
+//        Question question1 = questionRepository.findByQuesId(quesId);
+//        UserDAO user = question1.getUser();
+//        notification.setUser1(user);
+//
+//        notification.setPost(answer);
+
         return answerRepository.save(answer);
+
+
     }
 
     public List<Question> listViewOfQuestion (int page) {

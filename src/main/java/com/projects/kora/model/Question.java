@@ -8,7 +8,9 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Question extends QAModel{
+public class Question extends QAModel {
+    @Transient
+    private String categoryName;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int quesId;
@@ -43,5 +45,13 @@ public class Question extends QAModel{
 
     public void setQuesBody(String quesBody) {
         this.quesBody = quesBody;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 }
