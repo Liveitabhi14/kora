@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projects.kora.auth.model.UserDAO;
 import org.hibernate.annotations.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
 
+
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table
 public class Notification {
@@ -26,7 +29,6 @@ public class Notification {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Event event;
 
     @Any(metaColumn = @Column(name = "postType"))

@@ -26,7 +26,6 @@ public class Answer extends QAModel{
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ques_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Question question;
 
     public int getAnsId() {

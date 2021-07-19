@@ -35,6 +35,8 @@ public class KoraService {
     EventRepository eventRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    NotificationRepository notificationRepository;
 
     public String welcomeMessage() {
         return "Welcome to Kora";
@@ -57,14 +59,15 @@ public class KoraService {
         Question question = questionRepository.findByQuesId(quesId);
         answer.setQuestion(question);
 
-//        Notification notification = new Notification();
-//        notification.setEvent(eventRepository.findByEventType("Answer posted"));
-//
-//        Question question1 = questionRepository.findByQuesId(quesId);
-//        UserDAO user = question1.getUser();
-//        notification.setUser1(user);
-//
-//        notification.setPost(answer);
+        Notification notification = new Notification();
+        notification.setEvent(eventRepository.findByEventType("Answer posted"));
+
+        Question question1 = questionRepository.findByQuesId(quesId);
+        UserDAO user = question1.getUser();
+        notification.setUser1(user);
+
+        notification.setPost(answer);
+        notificationRepository.save(notification);
 
         return answerRepository.save(answer);
 
