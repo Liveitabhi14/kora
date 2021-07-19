@@ -10,11 +10,12 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

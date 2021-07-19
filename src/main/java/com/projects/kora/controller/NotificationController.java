@@ -16,5 +16,6 @@ public class NotificationController {
     @GetMapping ("/kora/notification")
     private List<Notification> userNotification() {
         return notificationService.userNotification();
+
     }
 }

@@ -46,12 +46,12 @@ public class KoraController {
         return koraService.listViewOfQuesAnsTop5();
     }
 
-    @PostMapping ("/kora/upVote/answer/{ansId}")
+    @PostMapping ("/kora/upvote/answer/{ansId}")
     private MyVote upVote (@PathVariable Integer ansId) {
         return koraService.upVote(ansId);
     }
 
-    @PostMapping ("/kora/downVote/answer/{ansId}")
+    @PostMapping ("/kora/downvote/answer/{ansId}")
     private MyVote downVote (@PathVariable Integer ansId) {
         return koraService.downVote(ansId);
     }

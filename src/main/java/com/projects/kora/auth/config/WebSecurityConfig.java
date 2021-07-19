@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 // don't authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/login", "/register", "/kora",
+                .antMatchers("/kora/login", "/kora/register", "/kora",
                         "/kora/question/{quesId}/answer/all",
                         "/kora/question/all",
                         "/kora/question/all/answer/top5")

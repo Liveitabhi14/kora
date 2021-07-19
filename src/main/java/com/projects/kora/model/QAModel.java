@@ -1,6 +1,7 @@
 package com.projects.kora.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.projects.kora.auth.model.UserDAO;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -12,6 +13,7 @@ import java.util.Date;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class QAModel {
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate

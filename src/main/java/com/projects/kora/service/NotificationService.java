@@ -23,7 +23,10 @@ public class NotificationService {
     private int getUserId() { return authUserDetailsService.getUserIdByUsername(jwtTokenUtil.username); }
 
     public List<Notification> userNotification() {
-        int user_id = getUserId();
-        return notificationRepository.findByUser1_userId(user_id);
+        int userId = getUserId();
+        List<Notification> notificationList = notificationRepository.findByUser1_userId(userId);
+        notificationRepository.updateNotificationSeen(userId);
+        return notificationList;
+
     }
 }

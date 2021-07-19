@@ -51,7 +51,6 @@ public class KoraService {
 
     public Question saveQuestion ( Question question) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
-        //question.setUserId(getUserId());
         Category category = categoryRepository.findByCatName(question.getCategoryName());
         question.setCategory(category);
         question.setUser(user1);
@@ -67,8 +66,6 @@ public class KoraService {
         }
         return questionRepository.save(question);
     }
-
-
 
     public Answer saveAnswer (Integer quesId, Answer answer ) {
         UserDAO user1 = userRepository.findByUserId(getUserId());

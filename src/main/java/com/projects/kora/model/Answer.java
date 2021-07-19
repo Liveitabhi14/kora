@@ -5,9 +5,12 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 @Entity
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Answer extends QAModel{
 
     @Id

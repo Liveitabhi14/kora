@@ -1,14 +1,16 @@
 package com.projects.kora.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.projects.kora.auth.model.UserDAO;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class MyVote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

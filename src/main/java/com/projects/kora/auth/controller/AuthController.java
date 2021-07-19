@@ -31,7 +31,7 @@ public class AuthController {
     @Autowired
     private AuthUserDetailsService authUserDetailsService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/kora/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthRequest authenticationRequest)
             throws Exception {
 
@@ -44,7 +44,7 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/kora/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
         return ResponseEntity.ok(authUserDetailsService.saveUser(user));
     }
