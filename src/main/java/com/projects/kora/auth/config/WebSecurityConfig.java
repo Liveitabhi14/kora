@@ -50,12 +50,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Override
-    public void configure(WebSecurity webSecurity) throws Exception {
-
-        webSecurity.ignoring()
-                .antMatchers("/kora**");
-    }
+//    @Override
+//    public void configure(WebSecurity webSecurity) throws Exception {
+//
+//        webSecurity.ignoring()
+//                .antMatchers("/kora**");
+//    }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {

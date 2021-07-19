@@ -1,10 +1,9 @@
 package com.projects.kora.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

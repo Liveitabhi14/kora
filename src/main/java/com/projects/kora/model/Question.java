@@ -17,7 +17,7 @@ public class Question extends QAModel{
     private String quesBody;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cat_name", nullable = false)
+    @JoinColumn(name = "cat_name", referencedColumnName = "cat_name", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
 
