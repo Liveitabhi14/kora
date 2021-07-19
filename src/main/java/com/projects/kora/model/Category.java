@@ -7,14 +7,11 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int catId;
+    private int bitmapId;
 
     @Column (name = "cat_name",nullable = false)
     private String catName;
 
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bitmapId;
 
     public int getBitmapId() {
         return bitmapId;
@@ -22,14 +19,6 @@ public class Category {
 
     public void setBitmapId(int bitmapId) {
         this.bitmapId = bitmapId;
-    }
-
-    public int getCatId() {
-        return catId;
-    }
-
-    public void setCatId(int catId) {
-        this.catId = catId;
     }
 
     public String getCatName() {
