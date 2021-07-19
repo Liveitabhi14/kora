@@ -14,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.*;
 
 @Service
@@ -37,6 +39,9 @@ public class KoraService {
     CategoryRepository categoryRepository;
     @Autowired
     NotificationRepository notificationRepository;
+    @Autowired
+    EntityManager entityManager;
+
 
     public String welcomeMessage() {
         return "Welcome to Kora";
@@ -50,8 +55,20 @@ public class KoraService {
         Category category = categoryRepository.findByCatName(question.getCategoryName());
         question.setCategory(category);
         question.setUser(user1);
+        List<UserDAO> userList =  findUserListByCatName(question.getCategoryName());
+
+        Notification notification = new Notification();
+        notification.setEvent(eventRepository.findByEventType("Question posted"));
+        notification.setPost(question);
+        for(UserDAO user : userList) {
+            if(user.getUserId() == user1.getUserId()) continue;
+            notification.setUser1(user);
+            notificationRepository.save(notification);
+        }
         return questionRepository.save(question);
     }
+
+
 
     public Answer saveAnswer (Integer quesId, Answer answer ) {
         UserDAO user1 = userRepository.findByUserId(getUserId());
@@ -79,7 +96,6 @@ public class KoraService {
         Page<Question> questions = questionRepository.findAll(currPage);
         return questions.getContent();
     }
-
 
     public LinkedHashMap<String ,List<Answer>> listViewOfQuesAnsTop5 () {
         LinkedHashMap< String,List<Answer> >  result = new LinkedHashMap<>();
@@ -149,6 +165,12 @@ public class KoraService {
         List<Answer> temp = answerRepository.findByQuestion_quesId(quesId);
         Question question = questionRepository.findByQuesId(quesId);
         return new Pair( question.getQuesBody(),temp );
+    }
+
+    private List<UserDAO> findUserListByCatName(String categoryName) {
+        int bitmapId = categoryRepository.findByCatName(categoryName).getBitmapId();
+        TypedQuery<UserDAO> query = entityManager.createQuery("SELECT e FROM UserDAO e where MOD(e.bitmapOfCategory/(?1) , 2) = 1" , UserDAO.class);
+        return query.setParameter(1, bitmapId).getResultList();
     }
 
 }
