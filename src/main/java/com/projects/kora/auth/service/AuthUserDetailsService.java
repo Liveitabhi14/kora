@@ -70,7 +70,7 @@ public class AuthUserDetailsService implements UserDetailsService {
         int bitmapValue = 0;
 
         for (String cat : list){
-            bitmapValue += (int) Math.pow(2,categoryRepository.findBitmapIdByCatName(cat)-1);
+            bitmapValue += (int) Math.pow(2,(categoryRepository.findByCatName(cat)).getBitmapId()-1);
         }
 
         return bitmapValue;

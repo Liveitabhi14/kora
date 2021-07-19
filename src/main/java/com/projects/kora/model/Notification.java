@@ -50,4 +50,53 @@ public class Notification {
     @CreatedDate
     @Column(name="created_at",nullable = true,updatable = false)
     private Date createdAt;
+
+
+    public int getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(int notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public UserDAO getUser1() {
+        return user1;
+    }
+
+    public void setUser1(UserDAO user1) {
+        this.user1 = user1;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public QAModel getPost() {
+        return post;
+    }
+
+    public void setPost(QAModel post) {
+        this.post = post;
+    }
+
+    public boolean isSeen() {
+        return seen;
+    }
+
+    public void setSeen(boolean seen) {
+        this.seen = seen;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }
