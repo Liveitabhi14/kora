@@ -12,7 +12,6 @@ public class Category {
     @Column (name = "cat_name",nullable = false)
     private String catName;
 
-
     public int getBitmapId() {
         return bitmapId;
     }

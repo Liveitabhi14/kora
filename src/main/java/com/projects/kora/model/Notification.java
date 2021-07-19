@@ -13,7 +13,6 @@ import java.util.Date;
 @Entity
 @Table
 public class Notification {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int notificationId;
@@ -30,7 +29,6 @@ public class Notification {
     @JsonIgnore
     private Event event;
 
-
     @Any(metaColumn = @Column(name = "postType"))
     @AnyMetaDef(idType = "int", metaType = "string",
             metaValues = {
@@ -41,8 +39,6 @@ public class Notification {
     @JoinColumn(name = "post_Id")
     private QAModel post;
 
-
-
     @Column(columnDefinition = "boolean default false")
     private boolean seen;
 
@@ -50,7 +46,6 @@ public class Notification {
     @CreatedDate
     @Column(name="created_at",nullable = true,updatable = false)
     private Date createdAt;
-
 
     public int getNotificationId() {
         return notificationId;

@@ -17,9 +17,6 @@ public class Answer extends QAModel{
     @Column (name = "ans_body",nullable = false)
     private String ansBody;
 
-//    @Column(name="ques_id",nullable = false)
-//    private int quesId;
-
     @Column(columnDefinition = "integer default 0")
     private int upVoteSum;
 
@@ -31,20 +28,6 @@ public class Answer extends QAModel{
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Question question;
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private UserDAO user1;
-//
-//    public UserDAO getUser() {
-//        return user1;
-//    }
-//
-//    public void setUser(UserDAO user1) {
-//        this.user1 = user1;
-//    }
 
     public int getAnsId() {
         return ansId;

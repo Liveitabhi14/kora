@@ -14,9 +14,6 @@ public class MyVote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int voteId;
 
-//    @Column(name = "ans_id",nullable = true)
-//    private int ansId;
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ans_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -29,16 +26,11 @@ public class MyVote {
     @JsonIgnore
     private UserDAO user1;
 
-//    @Column(name="user_id",nullable = true)
-//    private int userId;
-
     @Column(name="upvote",nullable = true)
     private int upVote;
 
     @Column(name="downvote",nullable = true)
     private int downVote;
-
-
 
     public int getVoteId() {
         return voteId;
@@ -79,6 +71,4 @@ public class MyVote {
     public void setDownVote(int downVote) {
         this.downVote = downVote;
     }
-
-
 }

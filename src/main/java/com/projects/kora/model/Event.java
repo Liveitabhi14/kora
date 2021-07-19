@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Event {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int eventId;

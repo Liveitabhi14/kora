@@ -13,7 +13,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public class QAModel {
-
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     @Column(name="created_at",nullable = true,updatable = false)
@@ -23,9 +22,6 @@ public class QAModel {
     @CreatedDate
     @Column(name="updated_at",nullable=true)
     private Date updatedAt;
-
-//    @Column(name="user_id", nullable=true)
-//    private int userId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
